@@ -3,26 +3,18 @@ name: Deploy la Firebase Hosting
 on:
   push:
     branches:
-      - main  # Schimbă cu numele branch-ului pe care vrei să îl urmărești
+      - main
 
 jobs:
   deploy:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
-      
-      - uses: actions/setup-node@v2
-        with:
-          node-version: '20.12.1'  # Ajustează la versiunea de Node.js necesară proiectului tău
-      
-      - run: npm install
-      - run: npm run build  # Presupunând că ai un script de build; omită dacă nu este necesar
 
+      # Pasul de setup-node și npm install/build sunt eliminați
+      
       - uses: w9jds/firebase-action@master
         with:
           args: deploy --only hosting
         env:
           FIREBASE_TOKEN: ${{ secrets.FIREBASE_TOKEN }}
-
-          
-          
