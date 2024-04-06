@@ -1,0 +1,12 @@
+.register-container {
+    height: 100vh; /* Ocupă întreaga înălțime a ecranului */
+}
+
+.register-form-container {
+    width: 100%;
+    max-width: 400px; /* Lățimea maximă a formularului */
+    padding: 20px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* O umbră ușoară pentru un aspect modern */
+    background-color: white; /* Fundal alb pentru formular */
+    border-radius: 5px; /* Colțuri rotunjite */
+}
