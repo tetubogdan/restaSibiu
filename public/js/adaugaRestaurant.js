@@ -1,6 +1,19 @@
-document.getElementById('addRestaurantForm').addEventListener('submit', async function(event) {
+document.getElementById('addRestaurantForm').addEventListener('submit', function(event) {
     event.preventDefault();
 
+    firebase.auth().onAuthStateChanged(async (user) => {
+        if (user) {
+            console.log("Utilizator autentificat", user);
+            // Continuă cu procesul de adăugare a restaurantului, acum că știm că utilizatorul este autentificat
+            await addRestaurant();
+        } else {
+            console.log("Niciun utilizator autentificat");
+            alert('Te rugăm să te autentifici înainte de a adăuga un restaurant.');
+        }
+    });
+});
+
+async function addRestaurant() {
     // Colectează datele formularului
     const restaurantData = {
         name: document.getElementById('restaurantName').value.trim(),
@@ -8,21 +21,21 @@ document.getElementById('addRestaurantForm').addEventListener('submit', async fu
         city: document.getElementById('city').value.trim(),
         county: document.getElementById('county').value.trim(),
         googleMaps: document.getElementById('googleMaps').value.trim(),
-        // Programul va fi adăugat mai târziu după validare
+        // Programul și imaginile vor fi adăugate mai jos
     };
 
-    // Validarea datelor de intrare
+    // Validează datele de intrare
     if (!restaurantData.name || !restaurantData.city) {
         alert('Numele restaurantului și orașul sunt obligatorii.');
         return;
     }
 
-    const storageRef = firebase.storage().ref();
-    const logoFile = document.getElementById('logo').files[0]; // Preia fișierul logo
-    const bannerFile = document.getElementById('banner').files[0]; // Preia fișierul banner
+    // Obține referințele pentru fișierele selectate
+    const logoFile = document.getElementById('logo').files[0];
+    const bannerFile = document.getElementById('banner').files[0];
 
     try {
-        // Încărcarea logo-ului și banner-ului, dacă sunt selectate
+        // Încarcă logo-ul și banner-ul, dacă sunt selectate
         const logoUrl = logoFile ? await uploadFile(logoFile, 'logos') : '';
         const bannerUrl = bannerFile ? await uploadFile(bannerFile, 'banners') : '';
 
@@ -31,20 +44,20 @@ document.getElementById('addRestaurantForm').addEventListener('submit', async fu
         restaurantData.banner = bannerUrl;
 
         // Adaugă programul
-        const schedule = collectScheduleData();
-        restaurantData.schedule = schedule;
+        restaurantData.schedule = collectScheduleData();
 
-        // Adaugă restaurantul în colecția de restaurante
+        // Încercare de adăugare a restaurantului în Firestore
         const restaurantRef = await firebase.firestore().collection('restaurants').add(restaurantData);
         
         console.log("Restaurant adăugat cu ID: ", restaurantRef.id);
         alert('Restaurant adăugat cu succes!');
-        window.location.href = 'index.html'; // Modifică aceasta după necesități
+        window.location.href = 'index.html'; // Sau orice altă logica de post-adăugare
     } catch (error) {
         console.error('Eroare la adăugarea restaurantului:', error);
         alert('Eroare la adăugarea restaurantului: ' + error.message);
     }
-});
+}
+
 
 async function uploadFile(file, path) {
     const storageRef = firebase.storage().ref();
@@ -55,6 +68,7 @@ async function uploadFile(file, path) {
 
 function collectScheduleData() {
     const daysOfWeek = ['luni', 'marti', 'miercuri', 'joi', 'vineri', 'sambata', 'duminica'];
+    
     const schedule = {};
     daysOfWeek.forEach(day => {
         const start = document.getElementById(`${day}Start`).value;
