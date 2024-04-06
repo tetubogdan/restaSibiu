@@ -13,7 +13,7 @@ jobs:
 
       # Pasul de setup-node și npm install/build sunt eliminați
       
-      - uses: w9jds/firebase-action@master
+      - uses: w9jds/firebase-action@main
         with:
           args: deploy --only hosting
         env:
