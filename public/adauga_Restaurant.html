@@ -60,49 +60,55 @@
             </div>
             <div class="mb-3">
                 <h4>Program</h4>
-                <div class="row">
-                    <div class="col">
-                        <label for="luni" class="form-label">Luni</label>
-                        <input type="text" class="form-control" id="luni" value="11:00 - 22:00" required>
-                    </div>
-                    <div class="col">
-                        <label for="marti" class="form-label">Marti</label>
-                        <input type="text" class="form-control" id="marti" value="11:00 - 22:00" required>
-                    </div>
-                    <div class="col">
-                        <label for="miercuri" class="form-label">Miercuri</label>
-                        <input type="text" class="form-control" id="miercuri" value="11:00 - 22:00" required>
-                    </div>
-                    <div class="col">
-                        <label for="joi" class="form-label">Joi</label>
-                        <input type="text" class="form-control" id="joi" value="11:00 - 22:00" required>
-                    </div>
-                    <div class="col">
-                        <label for="vineri" class="form-label">Vineri</label>
-                        <input type="text" class="form-control" id="vineri" value="11:00 - 22:00" required>
-                    </div>
-                    <div class="col">
-                        <label for="sambata" class="form-label">Sambata</label>
-                        <input type="text" class="form-control" id="sambata" value="11:00 - 22:00" required>
-                    </div>
-                    <!-- Repetă pentru fiecare zi a săptămânii, modificând id-ul și label-ul corespunzător -->
-                    <div class="col">
-                        <label for="duminica" class="form-label">Duminică</label>
-                        <input type="text" class="form-control" id="duminica" value="11:00 - 22:00" required>
-                    </div>
+                <div id="scheduleContainer">
+                    <!-- Container pentru generarea programului dinamic -->
                 </div>
-            </div>
-            
+            </div>            
             <button type="submit" class="btn btn-primary">Adaugă</button>
         </form>
     </div>
     
+
+        
 
 
 
     <!-- Restul conținutului paginii aici -->
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/5.3.2/js/bootstrap.bundle.min.js"></script>
+    <script src="js/adaugaRestaurant.js"></script>
+
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const daysOfWeek = ['Luni', 'Marți', 'Miercuri', 'Joi', 'Vineri', 'Sâmbătă', 'Duminică'];
+            const scheduleContainer = document.getElementById('scheduleContainer');
+            
+            daysOfWeek.forEach(day => {
+                const dayDiv = document.createElement('div');
+                dayDiv.className = 'mb-3';
+                dayDiv.innerHTML = `
+                    <label class="form-label">${day}</label>
+                    <div class="d-flex">
+                        <select class="form-select me-2" id="${day.toLowerCase()}Start"></select>
+                        <select class="form-select" id="${day.toLowerCase()}End"></select>
+                    </div>
+                `;
+                scheduleContainer.appendChild(dayDiv);
+                
+                const startSelect = dayDiv.querySelector(`#${day.toLowerCase()}Start`);
+                const endSelect = dayDiv.querySelector(`#${day.toLowerCase()}End`);
+                
+                for (let hour = 0; hour < 24; hour++) {
+                    for (let minute of ['00', '15']) {
+                        const value = `${hour.toString().padStart(2, '0')}:${minute}`;
+                        startSelect.options.add(new Option(value, value, hour === 11 && minute === '00', hour === 11 && minute === '00'));
+                        endSelect.options.add(new Option(value, value, hour === 22 && minute === '00', hour === 22 && minute === '00'));
+                    }
+                }
+            });
+        });
+        </script>
 
 
     <script>
