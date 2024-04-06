@@ -21,5 +21,5 @@ jobs:
         with:
           repoToken: "${{ secrets.GITHUB_TOKEN }}"
           firebaseServiceAccount: "${{ secrets.FIREBASE_SERVICE_ACCOUNT }}"
-          projectId: "restaSibiu" # Înlocuiește cu ID-ul proiectului tău Firebase
+          projectId: "restasibiu" # Înlocuiește cu ID-ul proiectului tău Firebase
 
