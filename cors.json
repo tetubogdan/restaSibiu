@@ -1,0 +1,9 @@
+[
+    {
+      "origin": ["https://restasibiu.web.app"],
+      "method": ["GET", "POST", "HEAD", "PUT", "DELETE", "OPTIONS"],
+      "responseHeader": ["Content-Type"],
+      "maxAgeSeconds": 3600
+    }
+  ]
+  
