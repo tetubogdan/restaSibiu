@@ -10,8 +10,17 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
-      - uses: w9jds/firebase-action@master
+      - name: Setup Node.js
+        uses: actions/setup-node@v2
         with:
-          args: deploy --only hosting
-        env:
-          FIREBASE_TOKEN: ${{ secrets.FIREBASE_TOKEN }}
+          node-version: '14' # Alege versiunea de Node.js necesară proiectului tău
+      - name: Install Dependencies
+        run: npm install
+      - name: Build # Omit this step if your project does not require a build step
+        run: npm run build
+      - name: Deploy to Firebase
+        uses: FirebaseExtended/action-hosting-deploy@v0
+        with:
+          repoToken: "${{ secrets.GITHUB_TOKEN }}"
+          firebaseServiceAccount: "${{ secrets.FIREBASE_SERVICE_ACCOUNT }}"
+          projectId: "restaSibiu" # Înlocuiește cu ID-ul proiectului tău Firebase
