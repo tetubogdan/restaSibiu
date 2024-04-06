@@ -25,14 +25,31 @@
 
 </head>
 <body>
-    <div class="container">
-        <div class="d-flex justify-content-end pt-3">
+    <div class="container my-4">
+        <h1 class="text-center mb-4">Restaurante</h1>
+        <div class="d-flex justify-content-end">
             <button id="logout-button" class="btn btn-danger">Logout</button>
         </div>
         <div id="restaurants-container" class="row"></div>
     </div>
 
+    <!-- Modal pentru Detalii Restaurant -->
+    <div class="modal fade" id="restaurantModal" tabindex="-1" aria-labelledby="restaurantModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="restaurantModalLabel">Detalii Restaurant</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <!-- Conținutul va fi încărcat dinamic -->
+                </div>
+            </div>
+        </div>
+    </div>
+
 <script src="js/logout.js"></script>
+<script src="js/loadRestaurants.js"></script> <!-- Vom muta JavaScript-ul legat de restaurante într-un nou fișier pentru organizare mai bună -->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
 
 <script>
@@ -62,39 +79,5 @@
     
     includeHTML();
     </script>
-
-<script>
-    document.addEventListener('DOMContentLoaded', function() {
-        const db = firebase.firestore();
-        const restaurantsContainer = document.getElementById('restaurants-container');
-
-        db.collection('restaurants').get().then((querySnapshot) => {
-            querySnapshot.forEach((doc) => {
-                const restaurant = doc.data();
-                const restaurantCard = `
-                    <div class="col-md-4 mb-4">
-                        <div class="card" onclick="loadRestaurantDetails('${doc.id}')">
-                            <img src="${restaurant.banner}" class="card-img-top" alt="${restaurant.name}">
-                            <div class="card-body">
-                                <h5 class="card-title">${restaurant.name}</h5>
-                                <p class="card-text">${restaurant.address}</p>
-                            </div>
-                        </div>
-                    </div>
-                `;
-                restaurantsContainer.innerHTML += restaurantCard;
-            });
-        });
-    });
-
-    function loadRestaurantDetails(restaurantId) {
-        // Aici poți adăuga logica pentru încărcarea și afișarea detaliilor suplimentare ale restaurantului
-        console.log("Restaurant ID:", restaurantId);
-        // De exemplu, poți deschide un modal sau o nouă pagină cu detalii
-    }
-</script>
-
-
-
 </body>
 </html>
