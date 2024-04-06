@@ -29,7 +29,7 @@
         <div class="d-flex justify-content-end pt-3">
             <button id="logout-button" class="btn btn-danger">Logout</button>
         </div>
-        <div class="message">Salut, te-ai logat cu succes.</div>
+        <div id="restaurants-container" class="row"></div>
     </div>
 
 <script src="js/logout.js"></script>
@@ -62,7 +62,39 @@
     
     includeHTML();
     </script>
-    
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const db = firebase.firestore();
+        const restaurantsContainer = document.getElementById('restaurants-container');
+
+        db.collection('restaurants').get().then((querySnapshot) => {
+            querySnapshot.forEach((doc) => {
+                const restaurant = doc.data();
+                const restaurantCard = `
+                    <div class="col-md-4 mb-4">
+                        <div class="card" onclick="loadRestaurantDetails('${doc.id}')">
+                            <img src="${restaurant.banner}" class="card-img-top" alt="${restaurant.name}">
+                            <div class="card-body">
+                                <h5 class="card-title">${restaurant.name}</h5>
+                                <p class="card-text">${restaurant.address}</p>
+                            </div>
+                        </div>
+                    </div>
+                `;
+                restaurantsContainer.innerHTML += restaurantCard;
+            });
+        });
+    });
+
+    function loadRestaurantDetails(restaurantId) {
+        // Aici poți adăuga logica pentru încărcarea și afișarea detaliilor suplimentare ale restaurantului
+        console.log("Restaurant ID:", restaurantId);
+        // De exemplu, poți deschide un modal sau o nouă pagină cu detalii
+    }
+</script>
+
+
 
 </body>
 </html>
