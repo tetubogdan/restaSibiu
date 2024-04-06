@@ -25,8 +25,54 @@
     <script defer src="/__/firebase/init.js?useEmulator=true"></script>
 </head>
 <body>
-    <div id="header" include-html="header.html"></div>
+    <div id="header" include-html="header.html">    </div>
+
+    <div class="container mt-5">
+        <h2>Adaugă Restaurant</h2>
+        <form id="addRestaurantForm">
+            <div class="mb-3">
+                <label for="restaurantName" class="form-label">Nume Restaurant</label>
+                <input type="text" class="form-control" id="restaurantName" required>
+            </div>
+            <div class="mb-3">
+                <label for="address" class="form-label">Adresa</label>
+                <input type="text" class="form-control" id="address" required>
+            </div>
+            <div class="mb-3">
+                <label for="city" class="form-label">Localitate</label>
+                <input type="text" class="form-control" id="city" required>
+            </div>
+            <div class="mb-3">
+                <label for="county" class="form-label">Județ</label>
+                <input type="text" class="form-control" id="county" required>
+            </div>
+            <div class="mb-3">
+                <label for="googleMaps" class="form-label">Google Maps</label>
+                <input type="url" class="form-control" id="googleMaps">
+            </div>
+            <div class="mb-3">
+                <label for="logo" class="form-label">Logo</label>
+                <input type="file" class="form-control" id="logo">
+            </div>
+            <div class="mb-3">
+                <label for="banner" class="form-label">Banner</label>
+                <input type="file" class="form-control" id="banner">
+            </div>
+            <div class="mb-3">
+                <label for="schedule" class="form-label">Program</label>
+                <input type="text" class="form-control" id="schedule" required>
+            </div>
+            <button type="submit" class="btn btn-primary">Adaugă</button>
+        </form>
+    </div>
+    
+
+
+
     <!-- Restul conținutului paginii aici -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/5.3.2/js/bootstrap.bundle.min.js"></script>
+
 
     <script>
     // Functie pentru a include header.html
