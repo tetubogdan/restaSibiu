@@ -22,4 +22,6 @@ jobs:
           repoToken: "${{ secrets.GITHUB_TOKEN }}"
           firebaseServiceAccount: "${{ secrets.FIREBASE_SERVICE_ACCOUNT }}"
           projectId: "restasibiu" # Înlocuiește cu ID-ul proiectului tău Firebase
+          channelId: "your-channel-id" # Specifică ID-ul canalului aici
+
 
