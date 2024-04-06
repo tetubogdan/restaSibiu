@@ -12,7 +12,7 @@ jobs:
       - name: Setup Node.js
         uses: actions/setup-node@v2
         with:
-          node-version: '14' # Alege versiunea de Node.js necesară proiectului tău
+          node-version: '20' # Alege versiunea de Node.js necesară proiectului tău
       - name: Install Dependencies
         run: npm install
       # Pasul următor a fost eliminat pentru a evita eroarea
@@ -23,4 +23,3 @@ jobs:
           firebaseServiceAccount: "${{ secrets.FIREBASE_SERVICE_ACCOUNT }}"
           projectId: "restaSibiu" # Înlocuiește cu ID-ul proiectului tău Firebase
 
-          
