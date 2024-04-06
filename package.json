@@ -3,3 +3,7 @@
     "bootstrap": "^5.3.3"
   }
 }
+
+"scripts": {
+  "build": "webpack --config webpack.config.js"
+}
