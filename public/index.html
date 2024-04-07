@@ -25,28 +25,25 @@
 
 </head>
 <body>
-    <nav class="navbar navbar-light bg-light">
-        <div class="container">
-            <a class="navbar-brand" href="#">
-                <img src="logo.webp" alt="Logo" height="30">
-            </a>
-        </div>
-    </nav>
-
-    <div id="sidebar" class="d-flex flex-column flex-shrink-0 p-3 bg-light" style="width: 280px;">
-        <h4>Restaurante</h4>
-        <ul class="nav nav-pills flex-column mb-auto" id="restaurant-list">
-            <!-- Lista restaurantelor va fi populată dinamic -->
-        </ul>
-    </div>
+    <div class="container-fluid">
+        <div class="row">
+            <!-- Sidebar -->
+            <div id="sidebar" class="col-md-3 col-lg-2 d-md-block bg-light sidebar collapse">
+                <!-- Aici vine lista de restaurante -->
+            </div>
+            
+            <!-- Main content -->
+            <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-md-4">
+                <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+                    <h1 class="h2">Restaurante</h1>
+                    <div class="btn-toolbar mb-2 mb-md-0">
+                        <button id="logout-button" class="btn btn-sm btn-outline-secondary">Logout</button>
+                    </div>
+                </div>
     
     
-    <div class="container my-4">
-        <h1 class="text-center mb-4">Restaurante</h1>
-        <div class="d-flex justify-content-end">
-            <button id="logout-button" class="btn btn-danger">Logout</button>
+            </main>
         </div>
-        <div id="restaurants-container" class="row"></div>
     </div>
 
     <!-- Modal pentru Detalii Restaurant -->
