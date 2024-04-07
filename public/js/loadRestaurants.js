@@ -1,7 +1,8 @@
 document.addEventListener('DOMContentLoaded', async function() {
     const db = firebase.firestore();
-    const restaurantsContainer = document.getElementById('restaurants-container');
+    const restaurantsContainer = document.querySelector('main .row'); // Asigură-te că selectorul este corect
 
+    // Afișează restaurantele
     try {
         const querySnapshot = await db.collection('restaurants').get();
         querySnapshot.forEach((doc) => {
@@ -13,21 +14,25 @@ document.addEventListener('DOMContentLoaded', async function() {
         console.error("Eroare la încărcarea restaurantelor: ", error);
     }
 
-    db.collection('restaurants').get().then((querySnapshot) => {
+    // Populează lista de restaurante în sidebar
+    try {
+        const querySnapshot = await db.collection('restaurants').get();
         const restaurantList = document.getElementById('restaurant-list');
         querySnapshot.forEach((doc) => {
             const restaurant = doc.data();
             const listItem = `
                 <li class="nav-item">
-                    <a class="nav-link active" aria-current="page" href="#" onclick="loadRestaurantDetails('${doc.id}')">
-                        <img src="${restaurant.logo}" class="img-fluid" alt="${restaurant.name}" style="height: 20px; width: 20px;">
+                    <a class="nav-link" href="#" onclick="loadRestaurantDetails('${doc.id}')">
+                        <img src="${restaurant.logo}" alt="${restaurant.name}" style="height: 20px; width: 20px;">
                         ${restaurant.name}
                     </a>
                 </li>
             `;
             restaurantList.innerHTML += listItem;
         });
-    });
+    } catch (error) {
+        console.error("Eroare la încărcarea listei de restaurante: ", error);
+    }
 });
 
 function createRestaurantCard(restaurantId, restaurant) {
@@ -74,10 +79,19 @@ async function loadRestaurantDetails(restaurantId) {
 }
 
 function generateScheduleHTML(schedule) {
+    // Definirea ordinii zilelor săptămânii
+    const daysOrder = ["Luni", "Marti", "Miercuri", "Joi", "Vineri", "Sambata", "Duminica"];
+    
     let scheduleHTML = '<ul>';
-    for (let day in schedule) {
-        scheduleHTML += `<li>${day.charAt(0).toUpperCase() + day.slice(1)}: ${schedule[day]}</li>`;
-    }
+    daysOrder.forEach(day => {
+        // Convertim prima literă a zilei în literă mică pentru a se potrivi cheilor din obiectul 'schedule'
+        let dayKey = day.charAt(0).toLowerCase() + day.slice(1);
+        
+        // Verificăm dacă există program pentru ziua respectivă în 'schedule'
+        if (schedule[dayKey]) {
+            scheduleHTML += `<li>${day}: ${schedule[dayKey]}</li>`;
+        }
+    });
     scheduleHTML += '</ul>';
     return scheduleHTML;
 }

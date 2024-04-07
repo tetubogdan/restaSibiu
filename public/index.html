@@ -27,21 +27,38 @@
 <body>
     <div class="container-fluid">
         <div class="row">
-            <!-- Sidebar -->
-            <div id="sidebar" class="col-md-3 col-lg-2 d-md-block bg-light sidebar collapse">
-                <!-- Aici vine lista de restaurante -->
-            </div>
-            
-            <!-- Main content -->
-            <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-md-4">
-                <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
-                    <h1 class="h2">Restaurante</h1>
-                    <div class="btn-toolbar mb-2 mb-md-0">
-                        <button id="logout-button" class="btn btn-sm btn-outline-secondary">Logout</button>
+            <!-- Main content area where the navbar, banner, and restaurants will be displayed -->
+            <main class="col-12">
+
+                <!-- Navbar with logo, menu, and logout button -->
+                <nav class="navbar navbar-expand-lg navbar-light bg-light">
+                    <div class="container-fluid">
+                        <a class="navbar-brand" href="#">
+                            <!-- Replace 'logo.jpg' with your logo's actual path -->
+                            <img src="https://firebasestorage.googleapis.com/v0/b/restasibiu.appspot.com/o/logo.jpg?alt=media&token=6ad420e2-f8de-4fe4-99d5-9517b8e971a0" alt="Logo" width="70" height="70"> Resta Sibiu
+                        </a>
+                        <div class="d-flex">
+                            <!-- Assuming the logout button acts as part of your menu -->
+                            <button id="logout-button" class="btn btn-sm btn-outline-secondary">Logout</button>
+                        </div>
                     </div>
+                </nav>
+
+                <!-- Banner area -->
+                <div class="banner" style="margin-bottom: 20px;">
+                    <img src="https://firebasestorage.googleapis.com/v0/b/restasibiu.appspot.com/o/banner.png?alt=media&token=6ad420e2-f8de-4fe4-99d5-9517b8e971a0" alt="Banner" class="img-fluid">
                 </div>
-    
-    
+                
+                <!-- Horizontal line as a separator -->
+                <hr>
+                
+                <!-- Title for restaurant section -->
+                <h2 class="text-center my-4">Vezi aici restaurantele din zona ta!</h2>
+
+                <!-- Restaurants container -->
+                <div id="restaurants-container" class="row">
+                    <!-- Restaurants will be dynamically loaded here -->
+                </div>
             </main>
         </div>
     </div>

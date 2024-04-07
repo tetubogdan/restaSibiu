@@ -10,3 +10,62 @@
     background-color: white; /* Fundal alb pentru formular */
     border-radius: 5px; /* Colțuri rotunjite */
 }
+
+.card {
+    margin-bottom: 20px;
+}
+
+@media (min-width: 768px) {
+    .card-columns {
+        column-count: 4;
+    }
+}
+
+@media (max-width: 767.98px) {
+    .card-columns {
+        column-count: 1;
+    }
+}
+
+/* Personalizarea navbar-ului */
+.navbar {
+    background-color: #FFA500; /* Culoare de fundal portocalie */
+    box-shadow: 0 2px 4px rgba(0,0,0,.1); /* Umbra pentru navbar */
+}
+
+.navbar-brand img {
+    border-radius: 50%; /* Logo rotund */
+}
+
+/* Stilizarea cardurilor */
+.card {
+    border: none;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 4px 6px rgba(0,0,0,.1);
+}
+
+.card-img-top {
+    height: 200px; /* Înălțime fixă pentru imagini */
+    object-fit: cover; /* Ajustează imaginea pentru a acoperi întregul spațiu disponibil */
+}
+
+/* Buton de logout personalizat */
+#logout-button {
+    background-color: #007BFF;
+    color: white;
+    border-radius: 20px;
+    padding: 5px 15px;
+}
+
+/* Separator stilizat */
+hr {
+    border-top: 2px solid #FFA500;
+    width: 80%;
+    margin: auto;
+}
+
+/* Titlu secțiune restaurante */
+h2 {
+    color: #FFA500; /* Culoare titlu */
+}
