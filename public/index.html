@@ -121,78 +121,71 @@
         <p>2024 TasteIt.Restaurante &copy; Drepturi de autor.</p>
 </footer>
 <script>
-document.addEventListener('DOMContentLoaded', async function() {
-    const db = firebase.firestore();
-    const container = document.getElementById('restaurant-list');
-    let currentItem = 4;
+    document.addEventListener('DOMContentLoaded', async function() {
+        const db = firebase.firestore();
+        const container = document.getElementById('restaurant-list');
+        let currentItem = 4;
 
-    const loadRestaurants = async () => {
-        container.innerHTML = ''; 
-        const snapshot = await db.collection('restaurants').get();
-        let htmlContent = '';
-        snapshot.forEach(doc => {
-            const data = doc.data();
-            htmlContent += `
-                <div class="col-md-3 mb-4" style="display: none;">
-                    <div class="card">
-                        <img src="${data.imageUrl}" class="card-img-top" alt="${data.name}">
-                        <div class="card-body d-flex flex-column">
-                            <h5 class="card-title">${data.name}</h5>
-                            <p class="card-text">${data.description || "Descriere indisponibilă"}</p>
-                            <div class="rating"> 
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
+        const loadRestaurants = async () => {
+            container.innerHTML = '';
+            const snapshot = await db.collection('restaurants').get();
+            let htmlContent = '';
+            snapshot.forEach(doc => {
+                const data = doc.data();
+                htmlContent += `
+                    <div class="col-md-3 mb-4">
+                        <div class="card">
+                            <img src="${data.imageUrl}" class="card-img-top" alt="${data.name}">
+                            <div class="card-body d-flex flex-column">
+                                <h5 class="card-title">${data.name}</h5>
+                                <p class="card-text">${data.description || "Descriere indisponibilă"}</p>
+                                <div class="rating"> 
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                </div>
+                                <a href="#" class="card-button">Detalii</a>
                             </div>
-                            <a href="#" class="card-button">Detalii</a>
                         </div>
                     </div>
-                </div>
-            `;
-        });
-        container.innerHTML = htmlContent;
-        updateDisplay();
-    };
+                `;
+            });
+            container.innerHTML = htmlContent;
+            updateDisplay();
+        };
 
-    const updateDisplay = () => {
-    const boxes = document.querySelectorAll('.popular-places .container .row .col-md-3');
-    console.log('Numărul total de cutii:', boxes.length); // Loghează numărul de cutii
-    boxes.forEach((box, index) => {
-        if (index < currentItem) {
-            box.style.display = 'block';
-        }
+        const updateDisplay = () => {
+            const boxes = document.querySelectorAll('.popular-places .container .row .col-md-3');
+            boxes.forEach((box, index) => {
+                box.style.display = index < currentItem ? 'block' : 'none';
+            });
+
+            document.getElementById('load-more').style.display = currentItem < boxes.length ? 'block' : 'none';
+            document.getElementById('show-less').style.display = currentItem > 4 ? 'block' : 'none';
+        };
+
+        document.getElementById('load-more').onclick = () => {
+            const boxes = document.querySelectorAll('.popular-places .container .row .col-md-3');
+            for (let i = currentItem; i < currentItem + 4 && i < boxes.length; i++) {
+                boxes[i].style.display = 'block';
+            }
+            currentItem += 4;
+            updateDisplay();
+        };
+
+        document.getElementById('show-less').onclick = () => {
+            const boxes = document.querySelectorAll('.popular-places .container .row .col-md-3');
+            for (let i = currentItem - 1; i >= 4; i--) {
+                boxes[i].style.display = 'none';
+            }
+            currentItem = 4;
+            updateDisplay();
+        };
+
+        await loadRestaurants();
     });
-
-    console.log('currentItem:', currentItem); // Loghează valoarea currentItem
-    document.getElementById('load-more').style.display = currentItem < boxes.length ? 'block' : 'none';
-    document.getElementById('show-less').style.display = currentItem > 4 ? 'block' : 'none';
-};
-
-document.getElementById('load-more').onclick = () => {
-    const boxes = document.querySelectorAll('.popular-places .container .row .col-md-3');
-    for (let i = currentItem; i < currentItem + 4 && i < boxes.length; i++) {
-        boxes[i].style.display = 'block';
-    }
-    currentItem += 4;
-    console.log('currentItem după Load More:', currentItem); // Verifică valoarea după clic
-    updateDisplay();
-};
-
-document.getElementById('show-less').onclick = () => {
-    const boxes = document.querySelectorAll('.popular-places .container .row .col-md-3');
-    for (let i = boxes.length - 1; i >= 4; i--) {
-        boxes[i].style.display = 'none';
-    }
-    currentItem = 4;
-    console.log('currentItem după Show Less:', currentItem); // Verifică resetarea
-    updateDisplay();
-};
-
-    await loadRestaurants();
-});
-
     </script>
 <!--
 <script src="js/adaugaRestaIndex.js"></script>
