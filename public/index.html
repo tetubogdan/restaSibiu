@@ -68,8 +68,6 @@
                 <h2 class="text-center mb-5">Cele mai rezervate locații din Sibiu</h2>
                 <div class="row" id="restaurant-list"> <!-- Asigură-te că această secțiune există -->
                 </div>
-                <div id="load-more" style="display: none;">Load More</div>
-                <div id="show-less" style="display: none;"><button>Show Less</button></div>
             </div>
         </section>
         
@@ -124,66 +122,62 @@
     document.addEventListener('DOMContentLoaded', async function() {
         const db = firebase.firestore();
         const container = document.getElementById('restaurant-list');
-        let currentItem = 4;
-
+        let itemsPerLoad = 4; // Number of items to load per scroll
+        let currentItem = 0;
+        let totalItems = 0;
+        let allData = [];
+    
+        // Load all restaurant data from Firestore
         const loadRestaurants = async () => {
-            container.innerHTML = '';
             const snapshot = await db.collection('restaurants').get();
-            let htmlContent = '';
             snapshot.forEach(doc => {
-                const data = doc.data();
+                allData.push(doc.data());
+            });
+            totalItems = allData.length;
+            loadMoreItems(); // Load initial items
+        };
+    
+        // Function to load more items into the DOM
+        const loadMoreItems = () => {
+            const maxItem = Math.min(currentItem + itemsPerLoad, totalItems);
+            let htmlContent = '';
+            for (; currentItem < maxItem; currentItem++) {
+                const data = allData[currentItem];
                 htmlContent += `
                     <div class="col-md-3 mb-4">
-                        <div class="card">
+                        <div class="card" style="display: block;">
                             <img src="${data.logo}" class="card-img-top" alt="${data.name}">
                             <div class="card-body d-flex flex-column">
                                 <h5 class="card-title">${data.name}</h5>
-                                <p class="card-text">${data.description || "Descriere indisponibilă"}</p>
-                                <div class="rating"> 
+                                <p class="card-text">${data.description || "No description available"}</p>
+                                <div class="rating">
                                     <i class="fas fa-star"></i>
                                     <i class="fas fa-star"></i>
                                     <i class="fas fa-star"></i>
                                     <i class="fas fa-star"></i>
                                     <i class="fas fa-star"></i>
                                 </div>
-                                <a href="#" class="card-button">Detalii</a>
+                                <a href="#" class="card-button">Details</a>
                             </div>
                         </div>
                     </div>
                 `;
-            });
-            container.innerHTML = htmlContent;
-            updateDisplay();
-        };
-
-        const updateDisplay = () => {
-            const boxes = document.querySelectorAll('.popular-places .container .row .col-md-3');
-            boxes.forEach((box, index) => {
-                box.style.display = index < currentItem ? 'block' : 'none';
-            });
-
-            document.getElementById('load-more').style.display = currentItem < boxes.length ? 'block' : 'none';
-            document.getElementById('show-less').style.display = currentItem > 4 ? 'block' : 'none';
-        };
-
-        document.getElementById('load-more').onclick = () => {
-            const boxes = document.querySelectorAll('.popular-places .container .row .col-md-3');
-            for (let i = currentItem; i < currentItem + 4 && i < boxes.length; i++) {
-                boxes[i].style.display = 'block';
             }
-            currentItem += 4;
-            updateDisplay();
+            container.innerHTML += htmlContent; // Append new items to container
+            console.log("Items loaded: " + maxItem);
         };
-
-        document.getElementById('show-less').onclick = () => {
-            const boxes = document.querySelectorAll('.popular-places .container .row .col-md-3');
-            for (let i = currentItem - 1; i >= 4; i--) {
-                boxes[i].style.display = 'none';
+    
+        // Infinite scroll functionality
+        window.addEventListener('scroll', () => {
+            let windowRelativeBottom = document.documentElement.getBoundingClientRect().bottom;
+            let windowHeight = window.innerHeight;
+            
+            // Check if the window's bottom is close enough to the page's bottom to trigger loading more items
+            if (windowRelativeBottom <= windowHeight + 100) {
+                loadMoreItems();
             }
-            currentItem = 4;
-            updateDisplay();
-        };
-
+        });
+    
         await loadRestaurants();
     });
     </script>
