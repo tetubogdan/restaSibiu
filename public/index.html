@@ -61,8 +61,16 @@
             <h2>Descoperă Sibiul. Rezervă online, fără să suni.</h2>
             <a href="#explore" class="explore-button">Explore</a>
         </div>
-   
-   </section>
+    
+
+        <section class="popular-places">
+            <div class="container">
+                <h2 class="text-center mb-5">Cele mai rezervate locații din Sibiu</h2>
+                <div class="row" id="restaurant-list"> <!-- Asigură-te că această secțiune există -->
+                </div>
+            </div>
+        </section>
+        
 <section class="reservation-section">
     <div class="container">
         <div class="row align-items-center justify-content-around">
@@ -113,7 +121,7 @@
 <script>
     document.addEventListener('DOMContentLoaded', function() {
         const db = firebase.firestore();
-        const container = document.querySelector('.popular-places .container .row');
+        const container = document.getElementById('restaurant-list'); // Modifică selectorul conform HTML-ului
     
         // Functie pentru a obtine restaurantele din Firestore si a le afisa
         const loadRestaurants = async () => {
