@@ -68,10 +68,9 @@
                 <h2 class="text-center mb-5">Cele mai rezervate locații din Sibiu</h2>
                 <div class="row" id="restaurant-list"> <!-- Asigură-te că această secțiune există -->
                 </div>
+                <div id="load-more" style="display: none;">Load More</div>
+                <div id="show-less" style="display: none;"><button>Show Less</button></div>
             </div>
-            <div id="load-more" style="display: none;">Load More</div>
-<div id="show-less" style="display: none;"><button>Show Less</button></div>
-
         </section>
         
 <section class="reservation-section">
@@ -158,34 +157,38 @@ document.addEventListener('DOMContentLoaded', async function() {
     };
 
     const updateDisplay = () => {
-        const boxes = document.querySelectorAll('.popular-places .container .row .col-md-3');
-        boxes.forEach((box, index) => {
-            if (index < currentItem) {
-                box.style.display = 'block';
-            }
-        });
-
-        document.getElementById('load-more').style.display = currentItem < boxes.length ? 'block' : 'none';
-        document.getElementById('show-less').style.display = currentItem > 4 ? 'block' : 'none';
-    };
-
-    document.getElementById('load-more').onclick = () => {
-        const boxes = document.querySelectorAll('.popular-places .container .row .col-md-3');
-        for (let i = currentItem; i < currentItem + 4 && i < boxes.length; i++) {
-            boxes[i].style.display = 'block';
+    const boxes = document.querySelectorAll('.popular-places .container .row .col-md-3');
+    console.log('Numărul total de cutii:', boxes.length); // Loghează numărul de cutii
+    boxes.forEach((box, index) => {
+        if (index < currentItem) {
+            box.style.display = 'block';
         }
-        currentItem += 4;
-        updateDisplay();
-    };
+    });
 
-    document.getElementById('show-less').onclick = () => {
-        const boxes = document.querySelectorAll('.popular-places .container .row .col-md-3');
-        for (let i = boxes.length - 1; i >= 4; i--) {
-            boxes[i].style.display = 'none';
-        }
-        currentItem = 4;
-        updateDisplay();
-    };
+    console.log('currentItem:', currentItem); // Loghează valoarea currentItem
+    document.getElementById('load-more').style.display = currentItem < boxes.length ? 'block' : 'none';
+    document.getElementById('show-less').style.display = currentItem > 4 ? 'block' : 'none';
+};
+
+document.getElementById('load-more').onclick = () => {
+    const boxes = document.querySelectorAll('.popular-places .container .row .col-md-3');
+    for (let i = currentItem; i < currentItem + 4 && i < boxes.length; i++) {
+        boxes[i].style.display = 'block';
+    }
+    currentItem += 4;
+    console.log('currentItem după Load More:', currentItem); // Verifică valoarea după clic
+    updateDisplay();
+};
+
+document.getElementById('show-less').onclick = () => {
+    const boxes = document.querySelectorAll('.popular-places .container .row .col-md-3');
+    for (let i = boxes.length - 1; i >= 4; i--) {
+        boxes[i].style.display = 'none';
+    }
+    currentItem = 4;
+    console.log('currentItem după Show Less:', currentItem); // Verifică resetarea
+    updateDisplay();
+};
 
     await loadRestaurants();
 });
