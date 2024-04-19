@@ -69,6 +69,9 @@
                 <div class="row" id="restaurant-list"> <!-- Asigură-te că această secțiune există -->
                 </div>
             </div>
+            <div id="load-more" style="display: none;">Load More</div>
+<div id="show-less" style="display: none;"><button>Show Less</button></div>
+
         </section>
         
 <section class="reservation-section">
@@ -119,75 +122,74 @@
         <p>2024 TasteIt.Restaurante &copy; Drepturi de autor.</p>
 </footer>
 <script>
-    document.addEventListener('DOMContentLoaded', function() {
-        const db = firebase.firestore();
-        const container = document.getElementById('restaurant-list'); // Modifică selectorul conform HTML-ului
-    
-        // Functie pentru a obtine restaurantele din Firestore si a le afisa
-        const loadRestaurants = async () => {
-            container.innerHTML = ''; // Golește containerul pentru a evita duplicarea
-            const snapshot = await db.collection('restaurants').get();
-            snapshot.forEach(doc => {
-                const data = doc.data();
-                const cardHTML = `
-                    <div class="col-md-3 mb-4">
-                        <div class="card">
-                            <img src="${data.imageUrl}" class="card-img-top" alt="${data.name}">
-                            <div class="card-body d-flex flex-column">
-                                <h5 class="card-title">${data.name}</h5>
-                                <p class="card-text">${data.description || "Descriere indisponibilă"}</p>
-                                <div class="rating"> 
-                                    <!-- Afisarea stelelor de rating ar putea fi actualizata dinamic -->
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star"></i>
-                                </div>
-                                <a href="#" class="card-button">Detalii</a>
+document.addEventListener('DOMContentLoaded', async function() {
+    const db = firebase.firestore();
+    const container = document.getElementById('restaurant-list');
+    let currentItem = 4;
+
+    const loadRestaurants = async () => {
+        container.innerHTML = ''; 
+        const snapshot = await db.collection('restaurants').get();
+        let htmlContent = '';
+        snapshot.forEach(doc => {
+            const data = doc.data();
+            htmlContent += `
+                <div class="col-md-3 mb-4" style="display: none;">
+                    <div class="card">
+                        <img src="${data.imageUrl}" class="card-img-top" alt="${data.name}">
+                        <div class="card-body d-flex flex-column">
+                            <h5 class="card-title">${data.name}</h5>
+                            <p class="card-text">${data.description || "Descriere indisponibilă"}</p>
+                            <div class="rating"> 
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
                             </div>
+                            <a href="#" class="card-button">Detalii</a>
                         </div>
                     </div>
-                `;
-                container.innerHTML += cardHTML; // Adauga fiecare card în container
-            });
-        };
-    
-        loadRestaurants(); // Apelează funcția la încărcarea paginii
-    
-        // Gestionează butoanele de "Load More" și "Show Less" dacă este necesar
-        let loadMoreBtn = document.querySelector('#load-more');
-        let showLessBtn = document.querySelector('#show-less button');
-        let currentItem = 4;
-        
-        loadMoreBtn.onclick = () => {
-            let boxes = [...document.querySelectorAll('.popular-places .container .row .col-md-3')];
-            for (var i = currentItem; i < currentItem + 4; i++) {
-                if (boxes[i]) {
-                    boxes[i].style.display = 'inline-block';
-                }
+                </div>
+            `;
+        });
+        container.innerHTML = htmlContent;
+        updateDisplay();
+    };
+
+    const updateDisplay = () => {
+        const boxes = document.querySelectorAll('.popular-places .container .row .col-md-3');
+        boxes.forEach((box, index) => {
+            if (index < currentItem) {
+                box.style.display = 'block';
             }
-            currentItem += 4;
-        
-            if (currentItem >= boxes.length) {
-                loadMoreBtn.style.display = 'none';
-            }
-        
-            showLessBtn.style.display = 'inline-block';
-        };
-        
-        showLessBtn.onclick = () => {
-            let boxes = [...document.querySelectorAll('.popular-places .container .row .col-md-3')];
-            for (var i = currentItem - 1; i >= 0; i--) {
-                if (i >= 4) {
-                    boxes[i].style.display = 'none';
-                }
-            }
-            currentItem = 4;
-            loadMoreBtn.style.display = 'inline-block';
-            showLessBtn.style.display = 'none';
-        };
-    });
+        });
+
+        document.getElementById('load-more').style.display = currentItem < boxes.length ? 'block' : 'none';
+        document.getElementById('show-less').style.display = currentItem > 4 ? 'block' : 'none';
+    };
+
+    document.getElementById('load-more').onclick = () => {
+        const boxes = document.querySelectorAll('.popular-places .container .row .col-md-3');
+        for (let i = currentItem; i < currentItem + 4 && i < boxes.length; i++) {
+            boxes[i].style.display = 'block';
+        }
+        currentItem += 4;
+        updateDisplay();
+    };
+
+    document.getElementById('show-less').onclick = () => {
+        const boxes = document.querySelectorAll('.popular-places .container .row .col-md-3');
+        for (let i = boxes.length - 1; i >= 4; i--) {
+            boxes[i].style.display = 'none';
+        }
+        currentItem = 4;
+        updateDisplay();
+    };
+
+    await loadRestaurants();
+});
+
     </script>
 <!--
 <script src="js/adaugaRestaIndex.js"></script>
