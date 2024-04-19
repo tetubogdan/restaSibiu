@@ -1,113 +1,289 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Welcome</title>
-	<link rel="stylesheet" href="css/style.css">
-	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
-	<!-- update the version number as needed -->
-    <script defer src="/__/firebase/10.10.0/firebase-app-compat.js"></script>
-    <!-- include only the Firebase features as you need -->
-    <script defer src="/__/firebase/10.10.0/firebase-auth-compat.js"></script>
-    <script defer src="/__/firebase/10.10.0/firebase-database-compat.js"></script>
-    <script defer src="/__/firebase/10.10.0/firebase-firestore-compat.js"></script>
-    <script defer src="/__/firebase/10.10.0/firebase-functions-compat.js"></script>
-    <script defer src="/__/firebase/10.10.0/firebase-messaging-compat.js"></script>
-    <script defer src="/__/firebase/10.10.0/firebase-storage-compat.js"></script>
-    <script defer src="/__/firebase/10.10.0/firebase-analytics-compat.js"></script>
-    <script defer src="/__/firebase/10.10.0/firebase-remote-config-compat.js"></script>
-    <script defer src="/__/firebase/10.10.0/firebase-performance-compat.js"></script>
-	<script defer src="/__/firebase/init.js"></script>
-	<script src="js/checkSession.js"></script>
 
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="blank">
+    <script src="LOGin.js"   defer type="module"></script>
+    <link rel="stylesheet" href="PrincipalaStyle.css">
 
+    
+
+    <!----- icons link -------->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" >
+
+   <!---Bootstrap link -->
+   <!------ <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <script defer src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+----->
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
 
 </head>
+
 <body>
-    <div class="container-fluid">
+    
+
+   <header>
+       <div>  <h1 > <i class="fa-solid fa-utensils "></i> TasteIt.Restaurante</h1></div> 
+       <nav>
+        <ul>
+            <li><a href="index.html">HOME</a></li>
+            <li><a href="LogIn.html">LOGIN</a></li>
+            <li><a href="Register.html">REGISTER</a></li>
+            <li><a href="#book-table">BOOK TABLE</a></li>
+        </ul>
+    </nav>
+        
+        
+    </header>
+   <main>
+
+    
+        <div class="main-content">
+            <h2>Descoperă Sibiul. Rezervă online, fără să suni.</h2>
+            <a href="#explore" class="explore-button">Explore</a>
+        </div>
+    
+
+   <section class="popular-places">
+    <div class="container">
+        <h2 class="text-center mb-5 he">Cele mai rezervate locații din Sibiu</h2>
         <div class="row">
-            <!-- Main content area where the navbar, banner, and restaurants will be displayed -->
-            <main class="col-12">
-
-                <!-- Navbar with logo, menu, and logout button -->
-                <nav class="navbar navbar-expand-lg navbar-light bg-light">
-                    <div class="container-fluid">
-                        <a class="navbar-brand" href="#">
-                            <!-- Replace 'logo.jpg' with your logo's actual path -->
-                            <img src="https://firebasestorage.googleapis.com/v0/b/restasibiu.appspot.com/o/logo.jpg?alt=media&token=6ad420e2-f8de-4fe4-99d5-9517b8e971a0" alt="Logo" width="70" height="70"> Resta Sibiu
-                        </a>
-                        <div class="d-flex">
-                            <!-- Assuming the logout button acts as part of your menu -->
-                            <button id="logout-button" class="btn btn-sm btn-outline-secondary">Logout</button>
+            <div class="col-md-3 mb-4">
+                <div class="card">
+                    <img src="img/Fain.jpg" class="card-img-top" alt="Fain Restaurant">
+                    <div class="card-body d-flex flex-column">
+                        <h5 class="card-title">Fain Restaurant</h5>
+                        <p class="card-text">Restaurantul Fain oferă o experiență culinară deosebită, cu preparate delicioase și o atmosferă relaxantă.</p>
+                        <div class="rating">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
                         </div>
+                        <a href="#" class="card-button">Detalii</a>
                     </div>
-                </nav>
-
-                <!-- Banner area -->
-                <div class="banner" style="margin-bottom: 20px;">
-                    <img src="https://firebasestorage.googleapis.com/v0/b/restasibiu.appspot.com/o/banner.png?alt=media&token=6ad420e2-f8de-4fe4-99d5-9517b8e971a0" alt="Banner" class="img-fluid">
                 </div>
-                
-                <!-- Horizontal line as a separator -->
-                <hr>
-                
-                <!-- Title for restaurant section -->
-                <h2 class="text-center my-4">Vezi aici restaurantele din zona ta!</h2>
-
-                <!-- Restaurants container -->
-                <div id="restaurants-container" class="row">
-                    <!-- Restaurants will be dynamically loaded here -->
+            </div>
+            <div class="col-md-3 mb-4">
+                <div class="card">
+                    <img src="img/Jacob.jpg" class="card-img-top" alt="Jacob Cafe">
+                    <div class="card-body d-flex flex-column">
+                        <h5 class="card-title">Jacob Cafe</h5>
+                        <p class="card-text">Jacob Cafe este locul perfect pentru a savura o ceașcă de cafea proaspătă și a petrece timp de calitate cu prietenii.</p>
+                        <div class="rating">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                        </div>
+                        <a href="#" class="card-button">Detalii</a>
+                    </div>
                 </div>
-            </main>
+            </div>
+             <div class="col-md-3 mb-4">
+                <div class="card">
+                    <img src="img/CHARLIES.jpg" class="card-img-top" alt="Charlie's Specialty Coffee And Brunch">
+                    <div class="card-body d-flex flex-column">
+                        <h5 class="card-title">Charlie's Specialty</h5>
+                        <p class="card-text">Charlie's Specialty Coffee And Brunch: Delicii franțuzești și italiene într-o ambianță primitoare.</p>
+                        <div class="rating">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                        </div>
+                        <a href="#" class="card-button">Detalii</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3 mb-4">
+                <div class="card">
+                    <img src="img/petitpatis.jpg" class="card-img-top" alt="Petit Patis">
+                    <div class="card-body d-flex flex-column">
+                        <h5 class="card-title">Petit Patis</h5>
+                        <p class="card-text">Petit Patis este o patiserie de renume, specializată în delicii franceze, de la croissante la prăjituri sofisticate.</p>
+                        <div class="rating">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                        </div>
+                        <a href="#" class="card-button">Detalii</a>
+                    </div>
+                </div>
+            </div>
+           
+             <div class="col-md-3 mb-4">
+                <div class="card">
+                    <img src="img/lumos.jpg" class="card-img-top" alt="Lumos Cafe">
+                    <div class="card-body d-flex flex-column">
+                        <h5 class="card-title">Lumos Cafe</h5>
+                        <p class="card-text">Lumos Cafe vă îmbie cu o  cafea excelentă și o varietate de produse de patiserie proaspăt preparate.</p>
+                        <div class="rating">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star-half-alt"></i>
+                        </div>
+                        <a href="#" class="card-button">Detalii</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3 mb-4">
+                <div class="card">
+                    <img src="img/nod.jpg" class="card-img-top" alt="Nod Cafe">
+                    <div class="card-body d-flex flex-column">
+                        <h5 class="card-title">Nod Cafe</h5>
+                        <p class="card-text">La NOD îți preparăm doar cafea proaspat prăjită ,de specialitate al cărui obiectiv este calitatea .</p>
+                        <div class="rating">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star-half-alt"></i>
+                        </div>
+                        <a href="#" class="card-button">Detalii</a> 
+                    </div>
+                </div>
+            </div>
+         <div class="col-md-3 mb-4">
+             <div class="card">
+                <img src="img/kombinat.jpg" class="card-img-top" alt="Kombinat Bar">
+                <div class="card-body d-flex flex-column">
+                    <h5 class="card-title">Kombinat Bar</h5>
+                    <p class="card-text">Kombinat Bar vă așteaptă cu o selecție variată de băuturi și un ambient plăcut alături de prieteni.</p>
+                    <div class="rating">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star-half-alt"></i>
+                    </div>
+                    <a href="#" class="card-button">Detalii</a>
+                    
+                </div>
+            </div>
+           </div>
+           
+            <div class="col-md-3 mb-4">
+                <div class="card">
+                    <img src="img/kulinarium.jpg" class="card-img-top" alt="Kulinarium">
+                    <div class="card-body d-flex flex-column">
+                        <h5 class="card-title">Kulinarium</h5>
+                        <p class="card-text">Descoperă gusturile autentice ale restaurantului Kulinarium, cu specific german și vegetarian.</p>
+                        <div class="rating">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star-half-alt"></i>
+                        </div>
+                        <a href="#" class="card-button">Detalii</a>
+                    </div>
+                </div>
+            </div>
+            
         </div>
     </div>
+   <div id="load-more">Load More</div>
+   <div id="show-less"> <button>Show Less</button></div>
+   
+   
 
-    <!-- Modal pentru Detalii Restaurant -->
-    <div class="modal fade" id="restaurantModal" tabindex="-1" aria-labelledby="restaurantModalLabel" aria-hidden="true">
-        <div class="modal-dialog modal-lg">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="restaurantModalLabel">Detalii Restaurant</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+   
+   
+   </section>
+<section class="reservation-section">
+    <div class="container">
+        <div class="row align-items-center justify-content-around">
+            <div class="col-md-3">
+                <div class="reservation-step">
+                    <i class="fas fa-utensils"></i>
+                    <h3>Alege localul</h3>
+                    <p>E ok dacă nu-ți mai amintești cum se numea. Poți căuta și după tipul, bucătăria sau adresa acestuia. Dacă nu ai idei, uită-te prin Colecții.</p>
                 </div>
-                <div class="modal-body">
-                    <!-- Conținutul va fi încărcat dinamic -->
+            </div>
+            <div class="col-md-3">
+                <div class="reservation-step">
+                    <i class="far fa-calendar-alt"></i>
+                    <h3>Alege ziua</h3>
+                    <p>Sistemul o să îți afișeze toate zilele disponibile. Nu poți rezerva o masă în trecut, mașina timpului nu mai are benzină.</p>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="reservation-step">
+                    <i class="fas fa-chair"></i>
+                    <h3>Alege numărul de locuri</h3>
+                    <p>Dacă ieși cu mai mult de patru oameni, adaugă un loc în plus. Nu știi niciodată cine mai apare, sau cine are prea multe genți.</p>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="reservation-step">
+                    <i class="far fa-clock"></i>
+                    <h3>Alege ora rezervării</h3>
+                    <p>Îți vom sugera câteva ore pentru Cină, Prânz sau Micul Dejun. Dar poți alege altele, în funcție de cum ți-ai planificat ziua.</p>
                 </div>
             </div>
         </div>
     </div>
+</section>
 
-<script src="js/logout.js"></script>
-<script src="js/loadRestaurants.js"></script> <!-- Vom muta JavaScript-ul legat de restaurante într-un nou fișier pentru organizare mai bună -->
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+   <section class="business-solutions">
+    <div class="container">
+        <h2>Ai un restaurant, bar sau cafenea?</h2>
+        <a href="Business.html">Află mai multe despre soluțiile TasteIt.Restaurante Business.</a>
+    </div>
+   </section>
+   </main>
 
+    <footer class="header_footer_backround">
+     
+        <p>2024 TasteIt.Restaurante &copy; Drepturi de autor.</p>
+</footer>
 <script>
-    // Functie pentru a include header.html
-    function includeHTML() {
-        var z, i, elmnt, file, xhttp;
-        z = document.getElementsByTagName("*");
-        for (i = 0; i < z.length; i++) {
-            elmnt = z[i];
-            file = elmnt.getAttribute("include-html");
-            if (file) {
-                xhttp = new XMLHttpRequest();
-                xhttp.onreadystatechange = function() {
-                    if (this.readyState == 4) {
-                        if (this.status == 200) {elmnt.innerHTML = this.responseText;}
-                        if (this.status == 404) {elmnt.innerHTML = "Page not found.";}
-                        elmnt.removeAttribute("include-html");
-                        includeHTML();
-                    }
-                }
-                xhttp.open("GET", file, true);
-                xhttp.send();
-                return;
-            }
+
+    let loadMoreBtn = document.querySelector('#load-more');
+    let showLessBtn = document.querySelector('#show-less button');
+    let currentItem = 4;
+    
+    loadMoreBtn.onclick = () => {
+    let boxes = [...document.querySelectorAll('.popular-places .container .row .col-md-3')];
+    for (var i = currentItem; i < currentItem + 4; i++) {
+        if (boxes[i]) {
+            boxes[i].style.display = 'inline-block';
         }
     }
+    currentItem += 4;
+
+    if (currentItem >= boxes.length) {
+        loadMoreBtn.style.display = 'none';
+    }
+
+    showLessBtn.style.display = 'inline-block';
+}
+       
+       showLessBtn.onclick = () => {
+    let boxes = [...document.querySelectorAll('.popular-places .container .row .col-md-3')];
+    for (var i = currentItem - 1; i >= 0; i--) {
+        if (i >= 4) {
+            boxes[i].style.display = 'none';
+        }
+    }
+    currentItem = 4;
+    loadMoreBtn.style.display = 'inline-block';
+    showLessBtn.style.display = 'none';
+}
     
-    includeHTML();
+    
     </script>
+    
+    
 </body>
 </html>

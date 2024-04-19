@@ -1,19 +1,63 @@
-<!-- header.html -->
-<nav class="navbar navbar-expand-lg navbar-light bg-light">
-    <div class="container-fluid">
-        <a class="navbar-brand" href="#">Admin Dashboard</a>
-        <div class="collapse navbar-collapse">
-            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                <li class="nav-item">
-                    <a class="nav-link" href="admin.html">Dashboard</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="adauga_Restaurant.html">Adaugă Restaurant</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="adauga_Meniu.html">Adaugă Meniu</a>
-                </li>
-            </ul>
-        </div>
+<header>
+    <style>
+h1{
+    font-size: 60px;
+    color: antiquewhite;
+    text-align: center;
+  font-family: Brush Script MT, Brush Script Std, cursive;
+  font-style: italic;
+    text-shadow: 2px 2px 5px peru;
+}
+
+
+header{
+
+    backdrop-filter: blur(110px);
+    height: 100px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding:5px 50px;
+    box-sizing: border-box;
+    position: relative;
+    z-index: 10;
+    
+}
+ header ul {
+    padding: 0;
+    margin: 0;
+    list-style: none;
+    display: flex;
+    gap:60px;
+    
+ }
+ header ul li a {
+    text-decoration: none;
+    color: antiquewhite;
+    font-size: 20px;
+    font-weight: bold;
+}
+
+header ul li a:hover {
+    color: peru;
+}
+
+    </style>
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" >
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+
+
+    <div>
+        <h1><i class="fa-solid fa-utensils"></i> TasteIt.Restaurante</h1>
     </div>
-</nav>
+    <nav>
+        <ul>
+            <li><a href="index.html">HOME</a></li>
+            <li><a href="login.html">LOGIN</a></li>
+            <li><a href="register.html">REGISTER</a></li>
+            <li><a href="#book-table">BOOK TABLE</a></li>
+        </ul>
+    </nav>
+</header>
+

@@ -1,0 +1,156 @@
+h1{
+    font-size: 60px;
+    color: antiquewhite;
+    text-align: center;
+  font-family: Brush Script MT, Brush Script Std, cursive;
+  font-style: italic;
+    text-shadow: 2px 2px 5px peru;
+}
+
+
+header{
+
+    backdrop-filter: blur(110px);
+    height: 100px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding:5px 50px;
+    box-sizing: border-box;
+    position: relative;
+    z-index: 10;
+    
+}
+ header ul {
+    padding: 0;
+    margin: 0;
+    list-style: none;
+    display: flex;
+    gap:60px;
+    
+ }
+ header ul li a {
+    text-decoration: none;
+    color: antiquewhite;
+    font-size: 20px;
+    font-weight: bold;
+}
+
+header ul li a:hover {
+    color: peru;
+}
+*{
+    
+ 
+    margin: 0;
+    padding: 0;
+   
+}
+footer{
+
+    font-family: Brush Script MT, Brush Script Std ;
+    text-align: center;
+    color: aliceblue;
+    padding: 40px;
+    backdrop-filter : blur(110px);
+    font-size: 40px;
+    color: antiquewhite;
+    text-align: center;
+  font-family: Brush Script MT, Brush Script Std, cursive;
+  font-style: italic;
+  text-shadow: 2px 2px 5px peru;
+   
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background-image: url('img/pozafundal.jpg');
+    background-size: cover;
+    
+
+    
+
+}
+main{
+  display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh; /* Face ca secțiunea main să ocupe întreaga înălțime a ecranului */
+ 
+
+}
+.login-container {
+    width: 400px;
+    margin: 10px ;
+    padding: 20px;
+    backdrop-filter: blur(130px);
+    border-radius: 25px;
+     
+    flex-direction: column; /* Aliniere verticală */
+    align-items: center; /* Aliniere pe orizontală */
+    
+
+}
+
+h2 {
+    text-align: center;
+    color: antiquewhite;
+    margin-bottom: 20px;
+}
+
+.form-group {
+    margin-bottom: 20px;
+    display: flex; /* Aliniere pe orizontală */
+    align-items: center;
+    
+}
+.form-group i{
+    color: white;
+    margin-left: 10px; /* Spațiu între input și icon */
+}
+
+
+
+input[type="text"]
+ {
+    width: 100%;
+    padding: 10px;
+    background-color: antiquewhite;
+    border: 3px solid black;
+    border-radius: 10px;
+    flex: 1; /* Face ca input-ul să ocupe spațiul disponibil */
+    text-align: center;
+   
+}
+
+button {
+    width: 100%;
+    padding: 15px;
+    background-color: peru;
+    color: #fff;
+    border:  3px solid black;
+    border-radius: 10px;
+    
+   
+}
+
+button:hover {
+    background-color:burlywood;
+}
+
+.register-link {
+    text-align: center;
+    
+}
+
+.register-link a {
+    color:white;
+    text-decoration: none;
+}
+
+.register-link a:hover {
+    text-decoration: underline;
+}
+.register-link p{
+    color: white;
+}

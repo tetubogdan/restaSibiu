@@ -1,71 +1,762 @@
-.register-container {
-    height: 100vh; /* Ocupă întreaga înălțime a ecranului */
+
+
+h1{
+    font-size: 60px;
+    color: antiquewhite;
+    text-align: center;
+  font-family: Brush Script MT, Brush Script Std, cursive;
+  font-style: italic;
+    text-shadow: 2px 2px 5px peru;
 }
 
-.register-form-container {
-    width: 100%;
-    max-width: 400px; /* Lățimea maximă a formularului */
-    padding: 20px;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* O umbră ușoară pentru un aspect modern */
-    background-color: white; /* Fundal alb pentru formular */
-    border-radius: 5px; /* Colțuri rotunjite */
+
+header{
+
+    backdrop-filter: blur(110px);
+    height: 100px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding:5px 50px;
+    box-sizing: border-box;
+    position: relative;
+    z-index: 10;
+    
+}
+ header ul {
+    padding: 0;
+    margin: 0;
+    list-style: none;
+    display: flex;
+    gap:60px;
+    
+ }
+ header ul li a {
+    text-decoration: none;
+    color: antiquewhite;
+    font-size: 20px;
+    font-weight: bold;
 }
 
+header ul li a:hover {
+    color: peru;
+}
+.main-content {
+    text-align: center;
+ 
+    background-image: url('img/slide2.jpg');
+    background-size: cover;
+    background-position: center center; /* Centrează imaginea atât vertical, cât și orizontal */
+    padding: 140px 50px; /* Ajustează spațiul între conținut și marginea div-ului */
+}
+
+.main-content h2 {
+    font-size: 24px;
+    font-family:rush Script MT, Brush Script Std, cursive;
+    color: antiquewhite;
+    text-align: center;
+   font-style: italic;
+    text-shadow: 2px 2px 5px peru;
+}
+
+.explore-button {
+    display: inline-block;
+    padding: 10px 20px;
+    background-color:antiquewhite; /* Schimbă culoarea butonului după necesități */
+    color:grey;
+    border-radius: 5px;
+    
+}
+
+.explore-button:hover {
+   
+    background-color:peru; 
+    color:peachpuff;
+    box-shadow:  10px 10px 10px peachpuff;
+}
+
+ 
+ .popular-places{
+    background-color: antiquewhite;
+    padding: 50px 0;
+    text-align: center;
+    
+ }
+ .popular-places .container .row .col-md-3 {
+    display: none
+}
+
+.popular-places .container .row .col-md-3:nth-child(1),
+.popular-places .container .row .col-md-3:nth-child(2),
+.popular-places .container .row .col-md-3:nth-child(3),
+.popular-places .container .row .col-md-3:nth-child(4){
+    display: inline-block;
+}
+
+
+ /* Stilizare generală a cardurilor */
 .card {
+    border: none;
+    transition: transform 0.3s ease;
+    height: 450px; /* Înălțime fixă pentru toate cardurile */
+    overflow: hidden; /* Ascunde conținutul care depășește limitele cardului */
+}
+
+.card:hover {
+    transform: translateY(-5px); /* Efect de ridicare la hover */
+    color: #ff7f50;
+    box-shadow: 10px 10px 15px peru; 
+}
+
+/* Stilizare titlu card */
+.card-title {
+    font-weight: bold;
+}
+
+/* Stilizare buton */
+/* Stilizare buton */
+.card-button {
+    display: inline-block;
+    padding: 10px 20px;
+    background-color: peru; /* Schimbă culoarea de fundal */
+    color: white; /* Schimbă culoarea textului */
+    border: none; /* Elimină conturul butonului */
+    border-radius: 5px; /* Adaugă o mică curbă la marginile butonului */
+    font-size: 16px; /* Mărimea textului */
+    cursor: pointer; /* Indicator de cursor la interacțiune */
+    transition: background-color 0.3s ease; /* Efect de tranziție pentru culoarea de fundal la hover */
+}
+
+/* Stilizare buton la hover */
+.card-button:hover {
+    color: aliceblue;
+    background-color: burlywood; /* Schimbă culoarea de fundal la hover */
+}
+/* Stilizare imagine card */
+.card-img-top {
+    height: 200px; /* Înălțime fixă pentru imaginea din card */
+    object-fit: cover; /* Asigură că imaginea este întotdeauna complet vizibilă */
+}
+
+.reservation-section {
+    background-color: #f9f9f9;
+    padding: 50px 0;
+    
+}
+
+.reservation-step {
+    text-align: center;
+}
+
+.reservation-step i {
+    font-size: 48px;
+    color: #ff7f50; /* Culoarea iconului */
     margin-bottom: 20px;
 }
 
-@media (min-width: 768px) {
-    .card-columns {
-        column-count: 4;
-    }
+.reservation-step h3 {
+    font-size: 24px;
+    color: #333; /* Culoarea titlului */
+    margin-bottom: 10px;
 }
 
-@media (max-width: 767.98px) {
-    .card-columns {
-        column-count: 1;
-    }
+.reservation-step p {
+    font-size: 18px;
+    color: #666; /* Culoarea textului */
+}
+/*load more button*/
+#load-more{
+    margin-top: 20px;
+    display:inline-block;
+    padding: 10px 30px;
+    border: 1px solid black ;
+    color: darksalmon;
+    font-size: 16px;
+    background-color:bisque;
+    cursor: pointer;
+
+
+
+}
+#load-more:hover{
+    background-color: peru;
+    border-color:black;
+    color:yellow;
+    box-shadow: 10px 15px 15px orange;
 }
 
-/* Personalizarea navbar-ului */
-.navbar {
-    background-color: #FFA500; /* Culoare de fundal portocalie */
-    box-shadow: 0 2px 4px rgba(0,0,0,.1); /* Umbra pentru navbar */
+/*show less button */
+#show-less button {
+    margin-top: 20px;
+    display: none;
+    padding: 10px 30px;
+    border: 1px solid black;
+    color: darksalmon;
+    font-size: 16px;
+    background-color: bisque;
+    cursor: pointer;
 }
 
-.navbar-brand img {
-    border-radius: 50%; /* Logo rotund */
+#show-less button:hover {
+    background-color: peru;
+    border-color: black;
+    color: yellow;
+    box-shadow: 10px 15px 15px orange;
+}
+/*recenzii card*/
+.rating {
+    color: #f0e130; /* Culorile galben deschis sunt frecvent folosite pentru stele */
+    font-size: 24px; /* Ajustează dimensiunea stelelor */
 }
 
-/* Stilizarea cardurilor */
-.card {
-    border: none;
-    border-radius: 10px;
-    overflow: hidden;
-    box-shadow: 0 4px 6px rgba(0,0,0,.1);
+.rating i {
+    margin-right: 3px; /* Adaugă spațiu între steluțe */
 }
 
-.card-img-top {
-    height: 200px; /* Înălțime fixă pentru imagini */
-    object-fit: cover; /* Ajustează imaginea pentru a acoperi întregul spațiu disponibil */
+
+
+
+.business-solutions {
+    background-color:gray;
+    padding: 50px 0;
 }
 
-/* Buton de logout personalizat */
-#logout-button {
-    background-color: #007BFF;
+.business-solutions .container {
+    text-align: center;
+}
+
+.business-solutions h2 {
+    font-size: 32px;
+    color:orange;
+    margin-bottom: 20px ;
+    
+    
+    
+}
+
+.business-solutions a {
+    font-size: 18px;
+    color:oldlace;
+}
+.business-solutions a:hover{
+    color: oldlace;
+    box-shadow:0 10px 10px peru;
+}
+
+  
+*{
+    
+ 
+    margin: 0;
+    padding: 0;
+    
+   
+}
+footer{
+
+    font-family: Brush Script MT, Brush Script Std ;
+    text-align: center;
+    color: aliceblue;
+    padding: 40px;
+    backdrop-filter : blur(110px);
+    font-size: 40px;
+    color: antiquewhite;
+    text-align: center;
+  font-family: Brush Script MT, Brush Script Std, cursive;
+  font-style: italic;
+  text-shadow: 2px 2px 5px peru;
+   
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background-image: url('img/pozafundal.jpg');
+    background-size: cover;
+    margin:0;
+
+}
+
+
+html{
+    scroll-behavior: smooth;
+}
+
+h1{
+    font-size: 60px;
+    color: antiquewhite;
+    text-align: center;
+  font-family: Brush Script MT, Brush Script Std, cursive;
+  font-style: italic;
+    text-shadow: 2px 2px 5px peru;
+}
+
+
+header{
+
+    backdrop-filter: blur(110px);
+    height: 100px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding:5px 50px;
+    box-sizing: border-box;
+    position: relative;
+    z-index: 10;
+    
+}
+ header ul {
+    padding: 0;
+    margin: 0;
+    list-style: none;
+    display: flex;
+    gap:60px;
+    
+ }
+ header ul li a {
+    text-decoration: none;
+    color: antiquewhite;
+    font-size: 20px;
+    font-weight: bold;
+}
+
+header ul li a:hover {
+    color: peru;
+}
+
+ section .container  {
+    background-color: antiquewhite;
+    padding: 50px 0; /* Modifică padding-ul la 50px în sus și în jos și 0 pe orizontală */
+    text-align: center;
+    margin: 0 auto; /* Centrează containerul pe orizontală */
+    max-width: 100%; /* Asigură că containerul nu depășește lățimea ecranului */
+}
+
+.image-container img {
+    max-width: 100%; /* Face ca imaginea să nu depășească lățimea containerului */
+    
+    height: 450px; /* Asigură proporțiile corecte ale imaginii */
+   
+}
+
+.description p {
+   font-size: 20px;
+    font-family: 'Times New Roman', Times, serif;
+}
+
+.special-title {
+    font-size: 24px;
+    font-weight: bold;
+    text-decoration: underline peru;
+    font-style: italic;
+    text-shadow: 2px 2px 5px peru;
+}
+
+.special-text {
+    font-size: 25px;
+    font-weight: bold;
+    color: peru;
+    font-style: italic;
+    text-shadow: 2px 2px 5px peru;
+}
+
+.description button {
+    background-color: peru;
     color: white;
-    border-radius: 20px;
-    padding: 5px 15px;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: transform 0.3s ease; /* Adaugă o tranziție pentru transformarea butonului */
 }
 
-/* Separator stilizat */
-hr {
-    border-top: 2px solid #FFA500;
-    width: 80%;
-    margin: auto;
+.description button:hover {
+    transform: translateX(10px); /* Deplasează butonul spre dreapta cu 10px */
+    box-shadow:  10px 10px 10px peachpuff; /* Adaugă un efect de umbră */
+}
+      /*formular*/
+      #formContainer {
+        display: none; /* Ascunde formularul inițial */
+        margin-top: 20px; /* Adaugă un spațiu între buton și formular */
+        background-color: #fff; /* Background alb */
+        padding: 20px; /* Spațierea interiorului formularului */
+        border-radius:  10px; /* Rotunjirea marginilor formularului */
+        border:solid peru;
+        box-shadow: 0 4px 8px peru /* Umbra pentru efect de adâncime */
+    }
+    
+    .form-group {
+        margin-bottom: 20px; /* Adaugă un spațiu între fiecare grup de câmpuri */
+    }
+    
+    label {
+        display: block; /* Face ca etichetele să fie afișate pe o linie nouă */
+        font-weight: bold; /* Face textul etichetelor mai îngroșat */
+    }
+    
+    input[type="text"],
+    input[type="email"],
+    input[type="tel"],
+    textarea {
+        width: calc(100% - 22px); /* Asigură ca câmpurile de introducere să se întindă pe întreaga lățime disponibilă */
+        padding: 10px; /* Spațierea interiorului câmpurilor de introducere */
+        border: none; /* Elimină marginea câmpurilor de introducere */
+        border-radius: 5px; /* Rotunjirea marginilor câmpurilor de introducere */
+        background-color: #f9f9f9; /* Culoare de fundal a câmpurilor de introducere */
+        margin-bottom: 10px; /* Adaugă un spațiu între câmpurile de introducere */
+    }
+    
+    button[type="submit"] {
+        background-color: peru; /* Culoare de fundal a butonului de trimitere */
+        color: white; /* Culoare a textului butonului de trimitere */
+        padding: 10px 20px; /* Spațierea interiorului butonului de trimitere */
+        border: none; /* Elimină bordura butonului */
+        border-radius: 5px; /* Rotunjirea marginilor butonului de trimitere */
+        cursor: pointer; /* Schimbă cursorul la interacțiune cu butonul */
+        transition: background-color 0.3s ease; /* Adaugă o tranzitie lină pentru schimbarea culorii de fundal la hover */
+    }
+    
+    button[type="submit"]:hover {
+        background-color: #8b5d33; /* Culoare de fundal a butonului de trimitere la survol */
+    }
+
+
+*{
+    
+ 
+    margin: 0;
+    padding: 0;
+    
+   
+}
+footer{
+
+    font-family: Brush Script MT, Brush Script Std ;
+    text-align: center;
+    color: aliceblue;
+    padding: 40px;
+    backdrop-filter : blur(110px);
+    font-size: 40px;
+    color: antiquewhite;
+    text-align: center;
+  font-family: Brush Script MT, Brush Script Std, cursive;
+  font-style: italic;
+  text-shadow: 2px 2px 5px peru;
+   
 }
 
-/* Titlu secțiune restaurante */
+body {
+    font-family: Arial, sans-serif;
+    background-image: url('img/pozafundal.jpg');
+    background-size: cover;
+
+
+}
+
+
+html{
+   
+ scroll-behavior: smooth;
+}
+ 
+h1{
+    font-size: 60px;
+    color: antiquewhite;
+    text-align: center;
+  font-family: Brush Script MT, Brush Script Std, cursive;
+  font-style: italic;
+    text-shadow: 2px 2px 5px peru;
+}
+
+
+header{
+
+    backdrop-filter: blur(110px);
+    height: 100px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding:5px 50px;
+    box-sizing: border-box;
+    position: relative;
+    z-index: 10;
+    
+}
+ header ul {
+    padding: 0;
+    margin: 0;
+    list-style: none;
+    display: flex;
+    gap:60px;
+    
+ }
+ header ul li a {
+    text-decoration: none;
+    color: antiquewhite;
+    font-size: 20px;
+    font-weight: bold;
+}
+
+header ul li a:hover {
+    color: peru;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+}
+
+footer {
+    font-family: Brush Script MT, Brush Script Std;
+    text-align: center;
+    color: aliceblue;
+    padding: 40px;
+    backdrop-filter: blur(110px);
+    font-size: 40px;
+    color: antiquewhite;
+    text-align: center;
+    font-family: Brush Script MT, Brush Script Std, cursive;
+    font-style: italic;
+    text-shadow: 2px 2px 5px peru;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background-image: url('pozafundal.jpg');
+    background-size: cover;
+}
+
+main {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh; /* Face ca secțiunea main să ocupe întreaga înălțime a ecranului */
+}
+
+.register-container {
+    width: 400px;
+    margin: 10px;
+    padding: 20px;
+    backdrop-filter: blur(130px);
+    border-radius: 25px;
+    flex-direction: column; /* Aliniere verticală */
+    align-items: center; /* Aliniere pe orizontală */
+}
+
 h2 {
-    color: #FFA500; /* Culoare titlu */
+    text-align: center;
+    color: antiquewhite;
+    margin-bottom: 20px;
+}
+
+.form-group {
+    margin-bottom: 20px;
+    display: flex; /* Aliniere pe orizontală */
+    align-items: center;
+}
+
+.form-group i {
+    color: white;
+    margin-left: 10px; /* Spațiu între input și icon */
+}
+
+label {
+    display: block;
+    margin-bottom: 5px;
+}
+
+input[type="text"] {
+    width: 100%;
+    padding: 10px;
+    background-color: antiquewhite;
+    border: 3px solid black;
+    border-radius: 10px;
+    flex: 1; /* Face ca input-ul să ocupe spațiul disponibil */
+    text-align: center;
+}
+
+button {
+    width: 100%;
+    padding: 15px;
+    background-color: peru;
+    color: #fff;
+    border: 3px solid black;
+    border-radius: 10px;
+}
+
+button:hover {
+    background-color: burlywood;
+}
+
+.login-link {
+    text-align: center;
+}
+
+.login-link a {
+    color: white;
+    text-decoration: none;
+}
+
+.login-link a:hover {
+    text-decoration: underline;
+}
+
+.login-link p {
+    color: white;
+}
+
+h1{
+    font-size: 60px;
+    color: antiquewhite;
+    text-align: center;
+  font-family: Brush Script MT, Brush Script Std, cursive;
+  font-style: italic;
+    text-shadow: 2px 2px 5px peru;
+}
+
+
+header{
+
+    backdrop-filter: blur(110px);
+    height: 100px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding:5px 50px;
+    box-sizing: border-box;
+    position: relative;
+    z-index: 10;
+    
+}
+ header ul {
+    padding: 0;
+    margin: 0;
+    list-style: none;
+    display: flex;
+    gap:60px;
+    
+ }
+ header ul li a {
+    text-decoration: none;
+    color: antiquewhite;
+    font-size: 20px;
+    font-weight: bold;
+}
+
+header ul li a:hover {
+    color: peru;
+}
+*{
+    
+ 
+    margin: 0;
+    padding: 0;
+   
+}
+footer{
+
+    font-family: Brush Script MT, Brush Script Std ;
+    text-align: center;
+    color: aliceblue;
+    padding: 40px;
+    backdrop-filter : blur(110px);
+    font-size: 40px;
+    color: antiquewhite;
+    text-align: center;
+  font-family: Brush Script MT, Brush Script Std, cursive;
+  font-style: italic;
+  text-shadow: 2px 2px 5px peru;
+   
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background-image: url('pozafundal.jpg');
+    background-size: cover;
+    
+
+    
+
+}
+main{
+  display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh; /* Face ca secțiunea main să ocupe întreaga înălțime a ecranului */
+ 
+
+}
+.login-container {
+    width: 400px;
+    margin: 10px ;
+    padding: 20px;
+    backdrop-filter: blur(130px);
+    border-radius: 25px;
+     
+    flex-direction: column; /* Aliniere verticală */
+    align-items: center; /* Aliniere pe orizontală */
+    
+
+}
+
+h2 {
+    text-align: center;
+    color: antiquewhite;
+    margin-bottom: 20px;
+}
+
+.form-group {
+    margin-bottom: 20px;
+    display: flex; /* Aliniere pe orizontală */
+    align-items: center;
+    
+}
+.form-group i{
+    color: white;
+    margin-left: 10px; /* Spațiu între input și icon */
+}
+
+
+
+input[type="text"]
+ {
+    width: 100%;
+    padding: 10px;
+    background-color: antiquewhite;
+    border: 3px solid black;
+    border-radius: 10px;
+    flex: 1; /* Face ca input-ul să ocupe spațiul disponibil */
+    text-align: center;
+   
+}
+
+button {
+    width: 100%;
+    padding: 15px;
+    background-color: peru;
+    color: #fff;
+    border:  3px solid black;
+    border-radius: 10px;
+    
+   
+}
+
+button:hover {
+    background-color:burlywood;
+}
+
+.register-link {
+    text-align: center;
+    
+}
+
+.register-link a {
+    color:white;
+    text-decoration: none;
+}
+
+.register-link a:hover {
+    text-decoration: underline;
+}
+.register-link p{
+    color: white;
 }

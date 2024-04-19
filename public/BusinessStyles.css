@@ -1,0 +1,177 @@
+h1{
+    font-size: 60px;
+    color: antiquewhite;
+    text-align: center;
+  font-family: Brush Script MT, Brush Script Std, cursive;
+  font-style: italic;
+    text-shadow: 2px 2px 5px peru;
+}
+
+
+header{
+
+    backdrop-filter: blur(110px);
+    height: 100px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding:5px 50px;
+    box-sizing: border-box;
+    position: relative;
+    z-index: 10;
+    
+}
+ header ul {
+    padding: 0;
+    margin: 0;
+    list-style: none;
+    display: flex;
+    gap:60px;
+    
+ }
+ header ul li a {
+    text-decoration: none;
+    color: antiquewhite;
+    font-size: 20px;
+    font-weight: bold;
+}
+
+header ul li a:hover {
+    color: peru;
+}
+
+ section .container  {
+    background-color: antiquewhite;
+    padding: 50px 0; /* Modifică padding-ul la 50px în sus și în jos și 0 pe orizontală */
+    text-align: center;
+    margin: 0 auto; /* Centrează containerul pe orizontală */
+    max-width: 100%; /* Asigură că containerul nu depășește lățimea ecranului */
+}
+
+.image-container img {
+    max-width: 100%; /* Face ca imaginea să nu depășească lățimea containerului */
+    
+    height: 450px; /* Asigură proporțiile corecte ale imaginii */
+   
+}
+
+.description p {
+   font-size: 20px;
+    font-family: 'Times New Roman', Times, serif;
+}
+
+.special-title {
+    font-size: 24px;
+    font-weight: bold;
+    text-decoration: underline peru;
+    font-style: italic;
+    text-shadow: 2px 2px 5px peru;
+}
+
+.special-text {
+    font-size: 25px;
+    font-weight: bold;
+    color: peru;
+    font-style: italic;
+    text-shadow: 2px 2px 5px peru;
+}
+
+.description button {
+    background-color: peru;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: transform 0.3s ease; /* Adaugă o tranziție pentru transformarea butonului */
+}
+
+.description button:hover {
+    transform: translateX(10px); /* Deplasează butonul spre dreapta cu 10px */
+    box-shadow:  10px 10px 10px peachpuff; /* Adaugă un efect de umbră */
+}
+      /*formular*/
+      #formContainer {
+        display: none; /* Ascunde formularul inițial */
+        margin-top: 20px; /* Adaugă un spațiu între buton și formular */
+        background-color: #fff; /* Background alb */
+        padding: 20px; /* Spațierea interiorului formularului */
+        border-radius:  10px; /* Rotunjirea marginilor formularului */
+        border:solid peru;
+        box-shadow: 0 4px 8px peru /* Umbra pentru efect de adâncime */
+    }
+    
+    .form-group {
+        margin-bottom: 20px; /* Adaugă un spațiu între fiecare grup de câmpuri */
+    }
+    
+    label {
+        display: block; /* Face ca etichetele să fie afișate pe o linie nouă */
+        font-weight: bold; /* Face textul etichetelor mai îngroșat */
+    }
+    
+    input[type="text"],
+    input[type="email"],
+    input[type="tel"],
+    textarea {
+        width: calc(100% - 22px); /* Asigură ca câmpurile de introducere să se întindă pe întreaga lățime disponibilă */
+        padding: 10px; /* Spațierea interiorului câmpurilor de introducere */
+        border: none; /* Elimină marginea câmpurilor de introducere */
+        border-radius: 5px; /* Rotunjirea marginilor câmpurilor de introducere */
+        background-color: #f9f9f9; /* Culoare de fundal a câmpurilor de introducere */
+        margin-bottom: 10px; /* Adaugă un spațiu între câmpurile de introducere */
+    }
+    
+    button[type="submit"] {
+        background-color: peru; /* Culoare de fundal a butonului de trimitere */
+        color: white; /* Culoare a textului butonului de trimitere */
+        padding: 10px 20px; /* Spațierea interiorului butonului de trimitere */
+        border: none; /* Elimină bordura butonului */
+        border-radius: 5px; /* Rotunjirea marginilor butonului de trimitere */
+        cursor: pointer; /* Schimbă cursorul la interacțiune cu butonul */
+        transition: background-color 0.3s ease; /* Adaugă o tranzitie lină pentru schimbarea culorii de fundal la hover */
+    }
+    
+    button[type="submit"]:hover {
+        background-color: #8b5d33; /* Culoare de fundal a butonului de trimitere la survol */
+    }
+
+
+*{
+    
+ 
+    margin: 0;
+    padding: 0;
+    
+   
+}
+footer{
+
+    font-family: Brush Script MT, Brush Script Std ;
+    text-align: center;
+    color: aliceblue;
+    padding: 40px;
+    backdrop-filter : blur(110px);
+    font-size: 40px;
+    color: antiquewhite;
+    text-align: center;
+  font-family: Brush Script MT, Brush Script Std, cursive;
+  font-style: italic;
+  text-shadow: 2px 2px 5px peru;
+   
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background-image: url('img/pozafundal.jpg');
+    background-size: cover;
+
+
+}
+
+
+html{
+   
+ scroll-behavior: smooth;
+}
+ 

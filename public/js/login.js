@@ -9,7 +9,7 @@ document.getElementById('login-form').addEventListener('submit', function(event)
         // Login reușit
         alert('Autentificare reușită!');
         // Redirecționează utilizatorul după login, de exemplu, către pagina principală
-        window.location.href = 'admin.html'; // Schimbă 'homepage.html' cu pagina dorită
+        window.location.href = 'index.html'; // Schimbă 'homepage.html' cu pagina dorită
     })
 
     
