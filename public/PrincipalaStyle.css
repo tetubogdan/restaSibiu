@@ -82,16 +82,34 @@ header ul li a:hover {
     text-align: center;
     
  }
- .popular-places .container .row .col-md-3 {
-    display: none
+
+ @keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translate3d(0, 20px, 0);
+    }
+    to {
+        opacity: 1;
+        transform: translate3d(0, 0, 0);
+    }
 }
 
-.popular-places .container .row .col-md-3:nth-child(1),
-.popular-places .container .row .col-md-3:nth-child(2),
-.popular-places .container .row .col-md-3:nth-child(3),
-.popular-places .container .row .col-md-3:nth-child(4){
-    display: inline-block;
+.popular-places .container .row .col-md-3 {
+    display: block; /* sau inline-block, dacă preferi */
+    animation: fadeIn 1s ease forwards; /* Aplică animația la fiecare element nou */
 }
+
+.col-md-3.mb-4 {
+    opacity: 0; /* start invisible */
+    transition: opacity 1s ease; /* animate opacity */
+}
+
+/* Optional: Animate entry from below */
+.col-md-3.mb-4 {
+    transform: translateY(20px);
+    transition: opacity 1s ease, transform 1s ease;
+}
+
 
 
  /* Stilizare generală a cardurilor */
@@ -279,4 +297,38 @@ body {
 
 html{
     scroll-behavior: smooth;
+}
+
+/* Modal styling */
+.modal-content {
+    background-color: #f8f9fa; /* fundal mai deschis pentru vizibilitate îmbunătățită */
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1); /* adaugă o umbră pentru efect de elevație */
+}
+
+.modal-header {
+    background: #704c07; /* capul modalului cu o culoare distinctă */
+    color: #ffffff;
+}
+
+.modal-footer {
+    background: #f1f1f1;
+    border-top: 1px solid #dee2e6;
+}
+
+.form-control {
+    border-radius: 0.25rem;
+    border: 1px solid #ced4da;
+    padding: 0.375rem 0.75rem;
+}
+
+.btn-primary {
+    background-color: #815b09;
+    border-color: #5a4407;
+}
+
+.btn-primary:hover {
+    background-color: #754200;
+    border-color: #5c4807;
 }

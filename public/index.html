@@ -118,14 +118,88 @@
      
         <p>2024 TasteIt.Restaurante &copy; Drepturi de autor.</p>
 </footer>
+
+<!-- Modal -->
+<div class="modal fade" id="restaurantModal" tabindex="-1" aria-labelledby="restaurantModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="restaurantModalLabel">Restaurant Details</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <img src="" id="restaurantImage" class="img-fluid rounded mb-3" alt="Restaurant Image">
+                <h4 id="restaurantName"></h4>
+                <p id="restaurantDescription"></p>
+                <p><span id="restaurantHours"></span></p>
+
+                <div class="mb-3">
+                    <label for="availableSeats" class="form-label">Locuri disponibile:</label>
+                    <div id="availableSeats" class="alert alert-info">Selectați o dată și o oră pentru a vedea locurile disponibile.</div>
+                </div>
+                
+                <div id="bookingForm">
+                    <div class="mb-3">
+                        <label for="numSeats" class="form-label">Number of seats:</label>
+                        <input type="number" class="form-control" id="numSeats" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="customerName" class="form-label">Your Name:</label>
+                        <input type="text" class="form-control" id="customerName" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="customerPhone" class="form-label">Phone number:</label>
+                        <input type="text" class="form-control" id="customerPhone" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="reservationDate" class="form-label">Date:</label>
+                        <input type="date" class="form-control" id="reservationDate" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="reservationTime" class="form-label">Time:</label>
+                        <div class="d-flex">
+                            <select class="form-control me-2" id="reservationHour" required></select>
+                            <select class="form-control" id="reservationMinute" required></select>
+                        </div>
+                    </div>
+                </div>
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+            <button type="button" class="btn btn-primary" onclick="makeReservation()">Make Reservation</button>
+        </div>
+        
+      </div>
+    </div>
+  </div>
+
+  
 <script>
+    var db;  // Declare `db` globally
+
     document.addEventListener('DOMContentLoaded', async function() {
-        const db = firebase.firestore();
+        db = firebase.firestore();  // Initialize `db` here
         const container = document.getElementById('restaurant-list');
         let itemsPerLoad = 4; // Number of items to load per scroll
         let currentItem = 0;
         let totalItems = 0;
         let allData = [];
+
+        // Aici setam data rezervarii sa fie mereu cu data de astazi
+        const today = new Date().toISOString().substring(0, 10);
+        document.getElementById('reservationDate').value = today;
+
+        // aici transformam zilele standard din en-us conform cu ce avem in firebase
+        const dayMapping = {
+    'Sunday': 'duminica',
+    'Monday': 'luni',
+    'Tuesday': 'marti',
+    'Wednesday': 'miercuri',
+    'Thursday': 'joi',
+    'Friday': 'vineri',
+    'Saturday': 'sambata'
+};
+
     
         // Load all restaurant data from Firestore
         const loadRestaurants = async () => {
@@ -140,51 +214,245 @@
         // Function to load more items into the DOM
         const loadMoreItems = () => {
             const maxItem = Math.min(currentItem + itemsPerLoad, totalItems);
-            let htmlContent = '';
             for (; currentItem < maxItem; currentItem++) {
                 const data = allData[currentItem];
-                htmlContent += `
-                    <div class="col-md-3 mb-4">
-                        <div class="card" style="display: block;">
-                            <img src="${data.logo}" class="card-img-top" alt="${data.name}">
-                            <div class="card-body d-flex flex-column">
-                                <h5 class="card-title">${data.name}</h5>
-                                <p class="card-text">${data.description || "No description available"}</p>
-                                <div class="rating">
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star"></i>
-                                </div>
-                                <a href="#" class="card-button">Details</a>
-                            </div>
-                        </div>
-                    </div>
-                `;
+                let cardElement = document.createElement('div');
+                cardElement.className = 'col-md-3 mb-4';
+                cardElement.innerHTML = `
+    <div class="card">
+        <img src="${data.logo}" class="card-img-top" alt="${data.name}">
+        <div class="card-body d-flex flex-column">
+            <h5 class="card-title">${data.name}</h5>
+            <p class="card-text">${data.description || "No description available"}</p>
+            <div class="rating">
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+            </div>
+            <button class="card-button">Details</button>
+        </div>
+    </div>
+`;
+                container.appendChild(cardElement);
+                cardElement.querySelector('.card-button').onclick = () => showDetails(data);
+    
+    
+                // Apply fade-in animation
+                requestAnimationFrame(() => {
+                    cardElement.style.transition = 'opacity 1s ease';
+                    cardElement.style.opacity = 1;
+                });
             }
-            container.innerHTML += htmlContent; // Append new items to container
-            console.log("Items loaded: " + maxItem);
         };
     
         // Infinite scroll functionality
         window.addEventListener('scroll', () => {
             let windowRelativeBottom = document.documentElement.getBoundingClientRect().bottom;
             let windowHeight = window.innerHeight;
-            
-            // Check if the window's bottom is close enough to the page's bottom to trigger loading more items
             if (windowRelativeBottom <= windowHeight + 100) {
                 loadMoreItems();
             }
         });
-    
-        await loadRestaurants();
+
+        const showDetails = (data) => {
+    document.getElementById('restaurantImage').src = data.logo;
+    document.getElementById('restaurantName').textContent = data.name;
+    document.getElementById('restaurantDescription').textContent = data.description;
+
+    // Handle the schedule and setup reservation time options
+    const scheduleElement = document.getElementById('restaurantHours');
+    let scheduleHtml = '';
+    if (data.schedule && typeof data.schedule === 'object') {
+        for (const day in data.schedule) {
+            if (data.schedule.hasOwnProperty(day)) {
+                scheduleHtml += `<strong>${day.charAt(0).toUpperCase() + day.slice(1)}:</strong> ${data.schedule[day]}<br>`;
+            }
+        }
+        scheduleElement.innerHTML = scheduleHtml;
+
+        // Set time options based on the schedule
+        setupTimeOptions(data.schedule);
+    } else {
+        scheduleElement.textContent = "Schedule not available";
+    }
+
+    var myModal = new bootstrap.Modal(document.getElementById('restaurantModal'), {
+        keyboard: false
     });
+    myModal.show();
+};
+  
+function setupTimeOptions(schedule) {
+    const today = new Date();
+    const dayOfWeek = today.toLocaleString('en-us', { weekday: 'long' });
+    const dayKey = dayMapping[dayOfWeek]; // Obține cheia corespunzătoare din dicționar
+
+    console.log("Today's schedule key:", dayKey); // Loghează cheia pentru verificare
+
+    if (schedule[dayKey]) {
+        const times = schedule[dayKey].split(' - ');
+        const startTime = parseInt(times[0].split(':')[0], 10);
+        const endTime = parseInt(times[1].split(':')[0], 10) - 1;
+
+        console.log("Working hours: ", startTime, "to", endTime);
+
+        const hourSelect = document.getElementById('reservationHour');
+        const minuteSelect = document.getElementById('reservationMinute');
+        
+        hourSelect.innerHTML = '';
+        minuteSelect.innerHTML = '';
+
+        // Populăm selectoarele pentru oră
+        for (let hour = startTime; hour <= endTime; hour++) {
+            let option = document.createElement('option');
+            option.value = hour;
+            option.textContent = `${hour}:00`;
+            hourSelect.appendChild(option);
+        }
+        // Setăm prima oră disponibilă ca selecție implicită
+        hourSelect.value = startTime.toString();
+
+        // Populăm selectoarele pentru minut
+        for (let minute = 0; minute < 60; minute += 10) {
+            let option = document.createElement('option');
+            option.value = minute;
+            option.textContent = minute < 10 ? `0${minute}` : `${minute}`;
+            minuteSelect.appendChild(option);
+        }
+        // Setăm minutul "00" ca selecție implicită
+        minuteSelect.value = "00";
+
+        // După completarea și setarea selecțiilor implicite, actualizăm locurile disponibile
+        const reservationDate = document.getElementById('reservationDate').value;
+        const reservationTime = `${hourSelect.value}:${minuteSelect.value}`;
+        const restaurantName = document.getElementById('restaurantName').textContent;
+        updateAvailableSeats(restaurantName, reservationDate, reservationTime);
+    } else {
+        console.error("No schedule for today:", dayKey);
+    }
+}
+    await loadRestaurants();
+    });
+
+    async function fetchRestaurantByName(restaurantName) {
+    const restaurantQuery = db.collection('restaurants').where('name', '==', restaurantName.trim());
+    const querySnapshot = await restaurantQuery.get();
+    if (querySnapshot.empty) {
+        console.log('No matching documents for:', restaurantName);
+        alert('Restaurant data not found.');
+        return null;
+    } else {
+        // Assuming the first document found is the correct one
+        return querySnapshot.docs[0];
+    }
+}
+
+async function makeReservation() {
+    // Prelucrarea elementelor de formular
+    const numSeats = parseInt(document.getElementById('numSeats').value, 10);
+    const customerPhone = document.getElementById('customerPhone').value;
+    const customerName = document.getElementById('customerName').value;
+    const reservationDate = document.getElementById('reservationDate').value;
+    const reservationHour = document.getElementById('reservationHour').value;
+    const reservationMinute = document.getElementById('reservationMinute').value;
+    const restaurantName = document.getElementById('restaurantName').textContent;
+
+    if (isNaN(numSeats) || numSeats <= 0 || !customerPhone || !customerName || !reservationDate || reservationHour == null || reservationMinute == null) {
+        alert('Please fill in all fields correctly.');
+        return;
+    }
+
+    const isAvailable = await updateAndCheckAvailability(restaurantName, reservationDate, reservationHour, reservationMinute, numSeats);
+
+    if (!isAvailable) {
+        alert('Not enough seats available for this time slot, considering a 45-minute window for each reservation.');
+        return;
+    }
+
+    // Continuare cu adăugarea rezervării dacă sunt suficiente locuri
+    await db.collection('reservations').add({
+        restaurantName: restaurantName,
+        customerName: customerName,
+        customerPhone: customerPhone,
+        numSeats: numSeats,
+        reservationDate: reservationDate,
+        reservationTime: `${reservationHour}:${reservationMinute}`,
+        bookingTime: new Date(`${reservationDate}T${reservationHour}:${reservationMinute}:00`)
+    });
+
+    alert('Reservation successful!');
+    const myModal = bootstrap.Modal.getInstance(document.getElementById('restaurantModal'));
+    myModal.hide();
+}
+
+async function updateAndCheckAvailability(restaurantName, reservationDate, reservationHour, reservationMinute, numSeats = 0) {
+    const reservationTime = new Date(`${reservationDate}T${reservationHour}:${reservationMinute}:00`);
+    const startTime = new Date(reservationTime.getTime() - 45 * 60000); // 45 minute înainte
+    const endTime = new Date(reservationTime.getTime() + 45 * 60000); // 45 minute după
+
+    const reservationsRef = db.collection('reservations');
+    const query = reservationsRef
+        .where('restaurantName', '==', restaurantName)
+        .where('reservationDate', '==', reservationDate)
+        .where('bookingTime', '>=', startTime)
+        .where('bookingTime', '<=', endTime);
+
+    const snapshot = await query.get();
+    let totalReservedSeats = 0;
+    snapshot.forEach(doc => {
+        totalReservedSeats += doc.data().numSeats;
+    });
+
+    const restaurantDoc = await fetchRestaurantByName(restaurantName);
+    if (!restaurantDoc) {
+        document.getElementById('availableSeats').textContent = 'Datele restaurantului nu sunt disponibile.';
+        return false;
+    }
+
+    const currentSeats = restaurantDoc.data().locuri;
+    const availableSeats = currentSeats - totalReservedSeats;
+
+    document.getElementById('availableSeats').textContent = `Locuri disponibile: ${availableSeats}`;
+
+    return numSeats === 0 ? true : availableSeats >= numSeats;
+}
+
+document.getElementById('reservationDate').addEventListener('change', () => {
+    const reservationDate = document.getElementById('reservationDate').value;
+    const hour = document.getElementById('reservationHour').value;
+    const minute = document.getElementById('reservationMinute').value;
+    const reservationTime = `${hour}:${minute}`;
+    const restaurantName = document.getElementById('restaurantName').textContent;
+    updateAndCheckAvailability(restaurantName, reservationDate, hour, minute);
+});
+
+document.getElementById('reservationHour').addEventListener('change', () => {
+    const reservationDate = document.getElementById('reservationDate').value;
+    const hour = document.getElementById('reservationHour').value;
+    const minute = document.getElementById('reservationMinute').value;
+    const reservationTime = `${hour}:${minute}`;
+    const restaurantName = document.getElementById('restaurantName').textContent;
+    updateAndCheckAvailability(restaurantName, reservationDate, hour, minute);
+});
+
+document.getElementById('reservationMinute').addEventListener('change', () => {
+    const reservationDate = document.getElementById('reservationDate').value;
+    const hour = document.getElementById('reservationHour').value;
+    const minute = document.getElementById('reservationMinute').value;
+    const reservationTime = `${hour}:${minute}`;
+    const restaurantName = document.getElementById('restaurantName').textContent;
+    updateAndCheckAvailability(restaurantName, reservationDate, hour, minute);
+});
+
     </script>
+    
 <!--
 <script src="js/adaugaRestaIndex.js"></script>
 -->
     
-    
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
+
 </body>
 </html>
